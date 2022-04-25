@@ -57,7 +57,7 @@ def get_types(booktitles, CACHE_FNAME):
     CACHE = read_cache(CACHE_FNAME)
 
     if url in CACHE:
-        print("caching sucess")
+        print("results from caching")
         return find_type_fromAPI(CACHE[url])
     
     else:
