@@ -39,15 +39,14 @@ def title_to_type(lst, CACHE_FNAME):
 
 
 def find_type_fromAPI(api_return):
-    try: 
-        type_list = api_return["results"][0]["subjects"]
-        for item in type_list:
-            if "--" in item:
-                lst = item.split(" -- ")
-                API_result = lst[1]
-                return API_result
-    except:
-        print("This book is not in our database")
+    type_list = api_return["results"][0]["subjects"]
+    for item in type_list:
+        if "--" in item:
+            lst = item.split(" -- ")
+            API_result = lst[1]
+            return API_result
+
+    print("This book is not in our database")
 
 
 
@@ -77,5 +76,5 @@ def get_types(booktitles, CACHE_FNAME):
 
 lst = ["Great Expectations", "Deathworld","Harry's Ladder to Learning"]
 dir_path = os.path.dirname(os.path.realpath(__file__))
-CACHE_FNAME = dir_path + '/' + "cache_itunes.json"
+CACHE_FNAME = dir_path + '/' + "cache.json"
 title_to_type(lst, CACHE_FNAME)
