@@ -29,7 +29,7 @@ def find_type(api_return):
 
 
 
-def request(bookname):
+def get_types(bookname):
     bookname.lower()
     base_url = "https://gutendex.com/books/?"
     para = "search=" + str(bookname)

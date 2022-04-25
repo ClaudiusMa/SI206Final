@@ -10,7 +10,9 @@ import csv
 import unittest
 
 from final_project import get_ratings_from_goodreads
-from 
+from Finalproject_Booktitle import get_info_lists
+from title_subject import read_list, find_type, read_list
+
 
 link = "https://www.goodreads.com/search?utf8=%E2%9C%93&query=frankenstein"
 get_ratings_from_goodreads((link))
