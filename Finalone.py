@@ -14,5 +14,3 @@ from Finalproject_Booktitle import get_info_lists
 from title_subject import read_list, find_type, read_list
 
 
-
-
