@@ -18,7 +18,7 @@ def read_list(lst):
     return dic
 
 
-def find_type(api_return):
+def find_type_fromAPI(api_return):
 
     type_list = api_return["results"][0]["subjects"]
     for item in type_list:
@@ -36,7 +36,7 @@ def get_types(bookname):
     url = base_url + para
     r = requests.get(url)
     dict = json.loads(r.text)
-    type = find_type(dict)
+    type = find_type_fromAPI(dict)
     return type
 
 lst = ["Great Expectations", "Deathworld","Harry's Ladder to Learning"]
