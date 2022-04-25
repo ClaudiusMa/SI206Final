@@ -5,10 +5,30 @@ import requests
 
 
 # Get titles and output the subjects - Chuxuan Ma
-def read_list(lst):
+
+def read_cache(CACHE_FNAME):
+
+    try:
+        file = open(CACHE_FNAME, "r")
+        content = file.read()
+        Jdata = json.loads(content)
+        file.close()
+        return Jdata
+    except:
+        return {}
+
+def write_cache(CACHE_FNAME, CACHE):
+
+    file = open(CACHE_FNAME, "w")
+    data = json.dumps(CACHE)
+    file.write(data)
+    file.close()
+
+
+def title_to_type(lst, CACHE_FNAME):
     dic = {}
     for item in lst:
-        topic = get_types(item)
+        topic = get_types(item, CACHE_FNAME)
         if topic in dic.keys():
             dic[topic].append(item)
 
@@ -24,20 +44,36 @@ def find_type_fromAPI(api_return):
     for item in type_list:
         if "--" in item:
             lst = item.split(" -- ")
-            type = lst[1]
-            return type
+            API_result = lst[1]
+            return API_result
 
 
 
-def get_types(bookname):
-    bookname.lower()
+def get_types(booktitles, CACHE_FNAME):
+    booktitles.lower()
     base_url = "https://gutendex.com/books/?"
-    para = "search=" + str(bookname)
+    para = "search=" + str(booktitles)
     url = base_url + para
-    r = requests.get(url)
-    dict = json.loads(r.text)
-    type = find_type_fromAPI(dict)
-    return type
+    CACHE = read_cache(CACHE_FNAME)
+
+    if url in CACHE:
+        print("caching sucess")
+        return find_type_fromAPI(CACHE[url])
+    
+    else:
+        try:
+            r = requests.get(url)
+            dict = json.loads(r.text)
+            CACHE[url] = dict
+            write_cache(CACHE_FNAME,CACHE)
+            type = find_type_fromAPI(dict)
+            return type
+        except:
+            print("Exception")
+            return None
+
 
 lst = ["Great Expectations", "Deathworld","Harry's Ladder to Learning"]
-read_list(lst)
+dir_path = os.path.dirname(os.path.realpath(__file__))
+CACHE_FNAME = dir_path + '/' + "cache_itunes.json"
+title_to_type(lst, CACHE_FNAME)
