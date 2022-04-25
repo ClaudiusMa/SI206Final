@@ -8,7 +8,7 @@ import requests
 def read_list(lst):
     dic = {}
     for item in lst:
-        topic = request(item)
+        topic = get_types(item)
         if topic in dic.keys():
             dic[topic].append(item)
 
