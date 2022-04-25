@@ -4,7 +4,7 @@ import os
 import requests
 
 
-
+# Get titles and output the subjects
 
 def read_list(lst):
     dic = {}
