@@ -39,13 +39,15 @@ def title_to_type(lst, CACHE_FNAME):
 
 
 def find_type_fromAPI(api_return):
-
-    type_list = api_return["results"][0]["subjects"]
-    for item in type_list:
-        if "--" in item:
-            lst = item.split(" -- ")
-            API_result = lst[1]
-            return API_result
+    try: 
+        type_list = api_return["results"][0]["subjects"]
+        for item in type_list:
+            if "--" in item:
+                lst = item.split(" -- ")
+                API_result = lst[1]
+                return API_result
+    except:
+        print("This book is not in our database")
 
 
 
