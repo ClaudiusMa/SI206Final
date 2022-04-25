@@ -4,8 +4,7 @@ import os
 import requests
 
 
-# Get titles and output the subjects
-
+# Get titles and output the subjects - Chuxuan Ma
 def read_list(lst):
     dic = {}
     for item in lst:
@@ -27,7 +26,6 @@ def find_type(api_return):
             lst = item.split(" -- ")
             type = lst[1]
             return type
-
 
 
 
